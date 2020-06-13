@@ -1,0 +1,12 @@
+.p-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $space_10;
+  &__box {
+    width: 500px;
+    border: 1px solid $color_default;
+    padding: $space_20;
+    box-sizing: border-box;
+  }
+}

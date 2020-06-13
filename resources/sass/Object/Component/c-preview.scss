@@ -1,0 +1,8 @@
+.c-preview {
+  max-width: 330px;
+  max-height: 230px;
+  object-fit: cover;
+  @include mq(sm) {
+    width: 100%;
+  }
+}

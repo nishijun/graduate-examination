@@ -1,0 +1,15 @@
+.c-switch {
+  display: flex;
+  justify-content: flex-end;
+  font-size: $font-size_20;
+  &-item {
+    border: 1px solid $color_default;
+    padding: $space_5;
+    cursor: pointer;
+    &.active {
+      font-weight: bold;
+      background: $color_red;
+      color: $color_white;
+    }
+  }
+}

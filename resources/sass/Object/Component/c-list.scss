@@ -1,0 +1,23 @@
+.c-list {
+  a {
+    text-decoration: none;
+    color: $color_white;
+    transition: .3s;
+    &:hover {
+      color: $color_deep-green;
+    }
+  }
+  @include mq(sm) {
+    font-size: $font-size_10;
+  }
+}
+.c-list-neo {
+  cursor: pointer;
+  transition: .3s;
+  &:hover {
+    color: $color_deep-green;
+  }
+  @include mq(sm) {
+    font-size: $font-size_10;
+  }
+}

@@ -1,0 +1,12 @@
+.c-plus {
+  background: $color_gray;
+  font-size: $font-size_30;
+  cursor: pointer;
+}
+.c-delete {
+  font-size: $font-size_30;
+  cursor: pointer;
+  position: absolute;
+  top: $space_30;
+  left: $space_30;
+}

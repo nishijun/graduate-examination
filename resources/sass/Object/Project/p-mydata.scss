@@ -1,0 +1,23 @@
+.p-mydata__mysteps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  // justify-content: space-between;
+  .p-mydata__mystep {
+    width: 31%;
+    margin: 0 1% $space_30;
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+    &:hover {
+      opacity: .8;
+    }
+    @include mq(xl) {
+      width: 48%;
+    }
+    @include mq(md) {
+      width: 100%;
+    }
+  }
+}

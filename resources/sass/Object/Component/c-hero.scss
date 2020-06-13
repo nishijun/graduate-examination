@@ -1,0 +1,40 @@
+.c-hero__message {
+  font-size: $font-size_90;
+  color: $color_red;
+  font-weight: bold;
+  text-shadow: 6px 6px 15px $color_white;
+  line-height: 1.3;
+  @include mq(xl) {
+    font-size: $font-size_50;
+  }
+  @include mq(sm) {
+    font-size: $font-size_30;
+  }
+}
+.c-hero__message2 {
+  font-size: $font-size_40;
+  text-align: center;
+  margin-bottom: $space_50;
+  span {
+    font-size: $font-size_50;
+    color: $color_red;
+  }
+  @include mq(xl) {
+    font-size: $font-size_20;
+    margin-bottom: $space_20;
+    span {
+      font-size: $font-size_30;
+    }
+  }
+  @include mq(sm) {
+    font-size: $font-size_30;
+  }
+}
+.c-hero__sentence {
+  line-height: 1.5;
+  margin-bottom: $space_50;
+  @include mq(xl) {
+    font-size: $font-size_10;
+    margin-bottom: $space_20;
+  }
+}

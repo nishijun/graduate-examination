@@ -1,0 +1,47 @@
+.c-auth__title {
+  text-align: center;
+  font-size: $font-size_40;
+  color: $color_red;
+  margin-bottom: $space_30;
+  @include mq(sm) {
+    font-size: $font-size_30;
+  }
+}
+.c-auth__label {
+  font-size: $font-size_20;
+  font-weight: bold;
+  margin-bottom: $space_10;
+  display: block;
+  color: $color_default;
+}
+.c-auth__input {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  padding: $space_5 $space_10;
+  font-size: $font-size_20;
+  box-sizing: border-box;
+  color: $color_default;
+}
+.c-auth__textarea {
+  width: 100%;
+  height: 300px;
+  outline: none;
+  padding: $space_5 $space_10;
+  font-size: $font-size_20;
+  box-sizing: border-box;
+  color: $color_default;
+}
+.c-auth-child {
+  position: relative;
+  background: $color_gray;
+  padding: $space_30;
+  margin-bottom: $space_30;
+  color: $color_default;
+  &-order {
+    text-align: center;
+    font-size: $font-size_30;
+    font-weight: bold;
+    margin-bottom: $space_30;
+  }
+}

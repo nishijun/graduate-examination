@@ -1,0 +1,14 @@
+.c-message {
+  position: fixed;
+  top: 60px;
+  background: #D6F9EE;
+  border: 1px solid #8BE2C5;
+  color: #2A6E59;
+  width: 100%;
+  font-size: $font-size_20;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 5px;
+  z-index: 2;
+}

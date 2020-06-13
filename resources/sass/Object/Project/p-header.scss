@@ -1,0 +1,23 @@
+.p-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: $color_white;
+  background: $color_red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  &__logo {
+    font-size: $font-size_30;
+    text-decoration: none;
+    color: $color_white;
+    font-weight: bold;
+    @include mq(sm) {
+      font-size: $font-size_20;
+    }
+  }
+  &__nav {
+    display: flex;
+  }
+}

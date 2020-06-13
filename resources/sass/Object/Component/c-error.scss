@@ -1,0 +1,14 @@
+.c-error {
+  border: 1px solid $color_red;
+  background: rgb(246, 213, 210);
+  color: $color_red;
+  font-weight: bold;
+  padding: $space_15;
+  margin-bottom: $space_15;
+  &-msg {
+    margin-bottom: $space_15;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

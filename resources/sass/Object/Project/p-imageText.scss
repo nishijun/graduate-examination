@@ -1,0 +1,48 @@
+.p-imageText {
+  padding: $space_100 $space_15;
+  &__title {
+    text-align: center;
+    font-size: $font-size_40;
+    font-weight: bold;
+    color: $color_default;
+    line-height: 1.5;
+    margin-bottom: $space_50;
+    @include mq(md) {
+      font-size: $font-size_default;
+    }
+  }
+  &__box {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: $space_100;
+    &:nth-child(3) {
+      flex-direction: row-reverse;
+    }
+    &:nth-child(4) {
+      margin-bottom: 0;
+    }
+    &-image {
+      width: 40%;
+      @include mq(md) {
+        width: 100%;
+        height: auto;
+        margin-bottom: $space_30;
+      }
+    }
+    &-text {
+      width: 40%;
+      font-size: $font-size_20;
+      font-weight: bold;
+      color: $color_default;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include mq(md) {
+        width: 100%;
+      }
+    }
+  }
+}

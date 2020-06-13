@@ -1,0 +1,10 @@
+.c-withdrawal {
+  text-align: center;
+  color: $color_red;
+  font-weight: bold;
+  font-size: $font-size_30;
+  margin-bottom: $space_30;
+  @include mq(sm) {
+    font-size: $font-size_20;
+  }
+}

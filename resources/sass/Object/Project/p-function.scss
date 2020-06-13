@@ -1,0 +1,57 @@
+.p-function {
+  padding: 0 $space_15;
+  box-sizing: border-box;
+  min-height: calc(100vh - 60px);
+  background: $color_gray;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  @include mq(md) {
+    padding: $space_100 $space_15;
+  }
+  &__title {
+    text-align: center;
+    font-size: $font-size_40;
+    font-weight: bold;
+    color: $color_default;
+    line-height: 1.5;
+    @include mq(md) {
+      font-size: $font-size_default;
+    }
+  }
+  &__items {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include mq(md) {
+      margin-top: $space_50;
+    }
+    .p-function__item {
+      width: 30%;
+      text-align: center;
+      @include mq(md) {
+        width: 100%;
+        margin-bottom: $space_50;
+        &:nth-child(3) {
+          margin-bottom: 0;
+        }
+      }
+      &-logo {
+        font-size: $font-size_70;
+      }
+      &-title {
+        font-size: $font-size_30;
+        font-weight: bold;
+        margin: $space_30 0;
+      }
+      &-text {
+        text-align: left;
+        @include mq(md) {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

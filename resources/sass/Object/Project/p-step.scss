@@ -1,0 +1,139 @@
+.p-step {
+  padding: $space_15;
+  box-sizing: border-box;
+  max-width: 1100px;
+  margin: 60px auto 0;
+  &__menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space_15;
+  }
+  &__image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+  }
+  &__detail {
+    margin: $space_15 0 $space_50;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &-sentence {
+      width: 48%;
+      background: $color_gray;
+      box-sizing: border-box;
+      padding: $space_15;
+      line-height: 1.3;
+      max-height: 165px;
+      word-wrap: break-word;
+      overflow-y: scroll;
+      white-space: pre-wrap;
+      @include mq(md) {
+        width: 100%;
+      }
+    }
+  }
+  &__children {
+    margin-top: $space_30;
+    .p-step__child {
+      display: flex;
+      border: 1px solid $color_default;
+      cursor: pointer;
+      transition: .3s;
+      margin-bottom: $space_30;
+      position: relative;
+      text-decoration: none;
+      color: $color_default;
+      &:hover {
+        opacity: .8;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, .3);
+        transform: translateY(-3px);
+      }
+      &.disabled {
+        pointer-events: none;
+      }
+      &-image {
+        width: 250px;
+        max-height: 170px;
+        object-fit: cover;
+        @include mq(md) {
+          width: 170px;
+        }
+        @include mq(sm) {
+          width: 100px;
+        }
+      }
+      &-content {
+        width: calc(100% - 250px);
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        @include mq(md) {
+          width: calc(100% - 170px);
+        }
+        @include mq(sm) {
+          width: calc(100% - 100px);
+        }
+        &-title {
+          font-size: $font-size_30;
+          @include mq(md) {
+            font-size: $font-size_20;
+          }
+          @include mq(sm) {
+            font-size: $font-size_default;
+          }
+        }
+        &-sentence {
+          font-size: $font-size_20;
+          width: 90%;
+          text-align: center;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          @include mq(md) {
+            font-size: $font-size_default;
+          }
+          @include mq(sm) {
+            font-size: $font-size_10;
+          }
+        }
+      }
+      &-clear {
+        position: absolute;
+        top: $space_10;
+        right: $space_10;
+        background: $color_gray;
+        padding: $space_5;
+        @include mq(md) {
+          font-size: $font-size_10;
+          top: $space_5;
+          right: $space_5;
+        }
+        @include mq(sm) {
+          padding: 0;
+        }
+      }
+    }
+  }
+  &__title {
+    text-align: center;
+    font-size: $font-size_30;
+    font-weight: bold;
+    margin-bottom: $space_15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    @include mq(md) {
+      font-size: $font-size_20;
+    }
+  }
+  &__content {
+    background: $color_gray;
+    padding: $space_15;
+    line-height: 1.3;
+    white-space: pre-wrap;
+  }
+}

@@ -1,0 +1,11 @@
+.c-twitter {
+  text-decoration: none;
+  background: $color_blue;
+  color: $color_white;
+  padding: $space_5;
+  border-radius: $space_5;
+  transition: .3s;
+  &:hover {
+    opacity: .8;
+  }
+}

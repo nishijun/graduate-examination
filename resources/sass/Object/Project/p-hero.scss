@@ -1,0 +1,38 @@
+.p-hero {
+  display: flex;
+  border-bottom: 1px solid $color_gray;
+  @include mq(xl) {
+    flex-direction: column;
+  }
+  &__image {
+    width: 50%;
+    background: url('/img/top-hero.jpg');
+    background-position: center;
+    background-size: cover;
+    @include mq(xl) {
+      width: 100%;
+      height: calc(50vh - 30px);
+    }
+    &-cover {
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, .2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+
+    }
+  }
+  &__content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    @include mq(xl) {
+      width: 100%;
+      height: calc(50vh - 30px);
+    }
+  }
+}

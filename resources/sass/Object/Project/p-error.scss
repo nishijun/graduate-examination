@@ -1,0 +1,8 @@
+.p-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-msg {
+    font-weight: bold;
+  }
+}

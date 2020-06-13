@@ -1,0 +1,51 @@
+.p-steps {
+  padding: $space_15;
+  &__hit {
+    text-align: right;
+    font-weight: bold;
+    font-size: $font-size_20;
+    margin-bottom: $space_15;
+  }
+  &__contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    @include mq(xl) {
+      flex-wrap: wrap;
+    }
+    &-search {
+      width: 25%;
+      object-fit: contain;
+      @include mq(xl) {
+        width: 100%;
+        margin-bottom: $space_30;
+      }
+    }
+    &-results {
+      width: 71%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      @include mq(xl) {
+        width: 100%;
+      }
+      .p-steps__contents-result {
+        width: 31%;
+        margin: 0 1% $space_30;
+        position: relative;
+        cursor: pointer;
+        transition: .3s;
+        text-decoration: none;
+        &:hover {
+          opacity: .8;
+        }
+        @include mq(lg) {
+          width: 48%;
+        }
+        @include mq(md) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

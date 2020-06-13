@@ -1,0 +1,109 @@
+.c-btn {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: $color_red;
+  transition: .3s;
+  display: block;
+  &:hover {
+    opacity: .8;
+  }
+  a {
+    color: $color_white;
+    font-size: $font-size_30;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+  }
+  @include mq(sm) {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    a {
+      font-size: $font-size_default;
+    }
+  }
+}
+
+.c-btn-neo {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: $color_red;
+  transition: .3s;
+  display: block;
+  color: $color_white;
+  font-size: $font-size_30;
+  cursor: pointer;
+  &:hover {
+    opacity: .8;
+  }
+  @include mq(sm) {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    font-size: $font-size_default;
+  }
+}
+
+.c-btn-green {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: $color_green;
+  transition: .3s;
+  display: block;
+  &:hover {
+    opacity: .8;
+  }
+  a {
+    color: $color_white;
+    font-size: $font-size_30;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+  }
+  @include mq(sm) {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    a {
+      font-size: $font-size_default;
+    }
+  }
+}
+
+.c-btn-orange {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  padding: 0;
+  border: none;
+  background: $color_orange;
+  transition: .3s;
+  display: block;
+  color: $color_white;
+  font-size: $font-size_30;
+  cursor: pointer;
+  &:hover {
+    opacity: .8;
+  }
+  @include mq(sm) {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    font-size: $font-size_default;
+  }
+}

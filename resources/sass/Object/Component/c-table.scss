@@ -1,0 +1,28 @@
+.c-table {
+  width: 48%;
+  font-size: $font-size_20;
+  @include mq(md) {
+    width: 100%;
+    margin-bottom: $space_15;
+    font-size: $font-size_default;
+  }
+  &-th {
+    background: $color_red;
+    color: $color_white;
+    font-weight: bold;
+    width: 30%;
+  }
+  &-th, &-td {
+    white-space: nowrap;
+    padding: $space_10;
+  }
+  &-td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+  }
+  .c-table, .c-table-th, .c-table-td {
+    border: 1px solid $color_default;
+  }
+}

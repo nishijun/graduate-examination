@@ -1,0 +1,14 @@
+.p-footer {
+  background: $color_black;
+  color: $color_white;
+  text-align: center;
+  line-height: 50px;
+  &__link {
+    text-decoration: none;
+    color: $color_white;
+    transition: .3s;
+    &:hover {
+      color: $color_deep-green;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.c-hover__target {
+  cursor: pointer;
+  &:hover {
+    opacity: .8s;
+  }
+}
+.c-hover__display {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid $color_default;
+  box-shadow: 6px 6px 30px rgba(0, 0, 0, .3);
+  width: 300px;
+  z-index: 2;
+  text-align: center;
+  padding: $space_15;
+  box-sizing: border-box;
+  background: $color_white;
+  color: $color_default;
+  &-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  &-name {
+    margin: $space_15 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  &-body {
+    font-size: $font-size_default;
+    max-height: 150px;
+    overflow: scroll;
+    text-align: left;
+    background: $color_gray;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    padding: $space_15;
+  }
+}

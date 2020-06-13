@@ -1,0 +1,12 @@
+.c-title {
+  text-align: center;
+  margin-bottom: $space_30;
+  &-content {
+    color: $color_red;
+    font-size: $font-size_40;
+    font-weight: bold;
+    border-bottom: 1px solid $color_red;
+    display: inline-block;
+    padding: 0 $space_15 $space_15;
+  }
+}

@@ -1,0 +1,79 @@
+.p-mypage {
+  padding: $space_15;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  @include mq(lg) {
+    flex-wrap: wrap;
+  }
+  &__toggle {
+    position: relative;
+    margin-bottom: $space_15;
+    font-weight: bold;
+    &-item {
+      background: $color_gray;
+      font-size: $font-size_default;
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      color: $color_default;
+      cursor: pointer;
+      text-align: center;
+      &-icon {
+        float: right;
+        line-height: 40px;
+        margin-right: 15px;
+      }
+    }
+    &-list {
+      position: absolute;
+      top: 40px;
+      z-index: 1;
+      &-link {
+        border-top: 1px solid $color_white;
+        a {
+          text-decoration: none;
+          color: $color_default;
+          display: inline-block;
+          width: 100%;
+          transition: .3s;
+          &:hover {
+            background: $color_red;
+            color: $color_white;
+          }
+        }
+      }
+    }
+  }
+  &__display {
+    border: 1px solid $color_default;
+    width: 71%;
+    box-sizing: border-box;
+    padding: $space_30 $space_50;
+    @include mq(lg) {
+      width: 100%;
+      padding: $space_15;
+    }
+  }
+  &__menu {
+    width: 25%;
+    background: $color_gray;
+    box-sizing: border-box;
+    padding: $space_30;
+    @include mq(lg) {
+      width: 100%;
+    }
+    &-item {
+      margin-bottom: $space_30;
+      a {
+        text-decoration: none;
+        color: $color_default;
+        font-weight: bold;
+        transition: .3s;
+        &:hover {
+          opacity: .8;
+        }
+      }
+    }
+  }
+}

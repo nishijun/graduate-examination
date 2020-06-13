@@ -1,0 +1,16 @@
+.u-display__sm-delete {
+  @include mq(sm) {
+    display: none;
+  }
+}
+.u-display__lg-delete {
+  @include mq(lg) {
+    display: none;
+  }
+}
+.u-display__lg-show {
+  display: none;
+  @include mq(lg) {
+    display: block;
+  }
+}
