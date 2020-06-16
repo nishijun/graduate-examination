@@ -4,7 +4,7 @@
     <div class="c-auth-child" v-if="childData.length >= 1" v-for="(item, index) in childData" :key="item.id">
 
       <!-- STEP削除ボタン -->
-      <i class="far fa-times-circle c-delete" @click="deleteForm(index)" v-if="item.order === childData.length"></i>
+      <i class="far fa-times-circle c-delete" @click="deleteForm(index)"></i>
 
       <!-- STEP番号 -->
       <p class="c-auth-child-order">STEP {{ item.order }}</p>
@@ -13,6 +13,12 @@
       <div class="u-margin__20b">
         <label for="child-title" class="c-auth__label">タイトル</label>
         <input id="child-title" type="text" name="title" class="c-auth__input" v-model="item.title">
+      </div>
+
+      <!-- 目安達成時間 -->
+      <div class="u-margin__20b">
+        <label for="child-achievement_time" class="c-auth__label">目安達成時間</label>
+        <input id="child-child-achievement_time" type="number" name="achievement_time" class="c-auth__input" v-model="item.achievement_time">
       </div>
 
       <!-- 内容 -->
@@ -49,6 +55,7 @@ export default {
       this.childData.push({
         order,
         title: '',
+        achievement_time: '',
         content: '',
         thumbnail: '',
         preview: null
@@ -60,10 +67,12 @@ export default {
       if (confirm('本当に削除しますか？')) {
         if (this.childData[index].id) {
           const formData = new FormData();
-          formData.append('id', this.childData[index].id);
+          formData.append('kid_id', this.childData[index].id);
+          formData.append('kid_order', this.childData[index].order);
+          formData.append('parent_id', this.$attrs.parentData.id);
           const response = await axios.post('/api/kid/delete', formData);
         }
-        this.childData.pop();
+        this.$emit('getStepData');
       }
     },
 

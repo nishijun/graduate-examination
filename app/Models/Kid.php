@@ -12,7 +12,7 @@ class Kid extends Model
   use SoftDeletes;
 
   protected $dates = ['deleted_at'];
-  protected $fillable = ['step_id', 'order', 'title', 'content', 'thumbnail'];
+  protected $fillable = ['step_id', 'order', 'title', 'achievement_time', 'content', 'thumbnail'];
 
   public function step() {
     return $this->belongsTo(Step::class);

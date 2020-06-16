@@ -3057,20 +3057,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 response = _context.sent;
+                // デバッグ
+                console.log(response.data);
 
                 if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_3__["UNPROCESSABLE_ENTITY"])) {
-                  _context.next = 10;
+                  _context.next = 11;
                   break;
                 }
 
                 _this.errors = response.data.errors;
                 return _context.abrupt("return", false);
 
-              case 10:
+              case 11:
                 _this.reset();
 
                 if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_3__["CREATED"])) {
-                  _context.next = 14;
+                  _context.next = 15;
                   break;
                 }
 
@@ -3078,7 +3080,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context.abrupt("return", false);
 
-              case 14:
+              case 15:
                 // Store更新
                 _this.$store.dispatch('step/getSteps'); // サクセスメッセージ登録
 
@@ -3090,7 +3092,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$router.push('/mypage');
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -3464,6 +3466,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['childData'],
   methods: {
@@ -3473,6 +3481,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.childData.push({
         order: order,
         title: '',
+        achievement_time: '',
         content: '',
         thumbnail: '',
         preview: null
@@ -3489,27 +3498,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!confirm('本当に削除しますか？')) {
-                  _context.next = 8;
+                  _context.next = 10;
                   break;
                 }
 
                 if (!_this.childData[index].id) {
-                  _context.next = 7;
+                  _context.next = 9;
                   break;
                 }
 
                 formData = new FormData();
-                formData.append('id', _this.childData[index].id);
-                _context.next = 6;
+                formData.append('kid_id', _this.childData[index].id);
+                formData.append('kid_order', _this.childData[index].order);
+                formData.append('parent_id', _this.$attrs.parentData.id);
+                _context.next = 8;
                 return axios.post('/api/kid/delete', formData);
 
-              case 6:
+              case 8:
                 response = _context.sent;
 
-              case 7:
-                _this.childData.pop();
+              case 9:
+                _this.$emit('getStepData');
 
-              case 8:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -3789,12 +3800,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       kid: {
         order: '',
         title: '',
+        achievement_time: '',
         content: '',
         thumbnail: ''
       },
@@ -3822,12 +3835,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.kid.order = response.data[1].order;
                 _this.kid.title = response.data[1].title;
+                _this.kid.achievement_time = response.data[1].achievement_time;
                 _this.kid.content = response.data[1].content;
                 _this.kid.thumbnail = response.data[1].thumbnail; // クリア有無
 
                 _this.isClear = response.data[2] ? true : false;
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -7110,7 +7124,7 @@ var render = function() {
             _c(
               _vm.step,
               _vm._b(
-                { tag: "component" },
+                { tag: "component", on: { getStepData: _vm.getStepData } },
                 "component",
                 {
                   parentData: _vm.parentData,
@@ -7467,16 +7481,14 @@ var render = function() {
       _vm._l(_vm.childData, function(item, index) {
         return _vm.childData.length >= 1
           ? _c("div", { key: item.id, staticClass: "c-auth-child" }, [
-              item.order === _vm.childData.length
-                ? _c("i", {
-                    staticClass: "far fa-times-circle c-delete",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteForm(index)
-                      }
-                    }
-                  })
-                : _vm._e(),
+              _c("i", {
+                staticClass: "far fa-times-circle c-delete",
+                on: {
+                  click: function($event) {
+                    return _vm.deleteForm(index)
+                  }
+                }
+              }),
               _vm._v(" "),
               _c("p", { staticClass: "c-auth-child-order" }, [
                 _vm._v("STEP " + _vm._s(item.order))
@@ -7510,6 +7522,43 @@ var render = function() {
                         return
                       }
                       _vm.$set(item, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "u-margin__20b" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "c-auth__label",
+                    attrs: { for: "child-achievement_time" }
+                  },
+                  [_vm._v("目安達成時間")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: item.achievement_time,
+                      expression: "item.achievement_time"
+                    }
+                  ],
+                  staticClass: "c-auth__input",
+                  attrs: {
+                    id: "child-child-achievement_time",
+                    type: "number",
+                    name: "achievement_time"
+                  },
+                  domProps: { value: item.achievement_time },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(item, "achievement_time", $event.target.value)
                     }
                   }
                 })
@@ -8037,6 +8086,10 @@ var render = function() {
     _vm._v(" "),
     _c("p", { staticClass: "p-step__title" }, [_vm._v(_vm._s(_vm.kid.title))]),
     _vm._v(" "),
+    _c("p", { staticClass: "p-step__achievement_time" }, [
+      _vm._v("目安達成時間：" + _vm._s(_vm.kid.achievement_time))
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "p-step__content" }, [
       _vm._v(_vm._s(_vm.kid.content))
     ])
@@ -8124,7 +8177,7 @@ var render = function() {
               href:
                 "https://twitter.com/share?text=" +
                 _vm.step.title +
-                "&url=http://example.com&hashtags=STEP",
+                "&url=http://ec2-3-1-184-214.ap-southeast-1.compute.amazonaws.com/&hashtags=STEP",
               target: "_blank"
             }
           },

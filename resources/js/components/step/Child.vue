@@ -15,6 +15,7 @@
       <div class="c-title-content u-margin__30t">STEP {{ kid.order }}</div>
     </div>
     <p class="p-step__title">{{ kid.title }}</p>
+    <p class="p-step__achievement_time">目安達成時間：{{ kid.achievement_time }}</p>
     <div class="p-step__content">{{ kid.content }}</div>
 
   </main>
@@ -27,6 +28,7 @@ export default {
       kid: {
         order: '',
         title: '',
+        achievement_time: '',
         content: '',
         thumbnail: ''
       },
@@ -44,6 +46,7 @@ export default {
       // 子STEP情報
       this.kid.order = response.data[1].order;
       this.kid.title = response.data[1].title;
+      this.kid.achievement_time = response.data[1].achievement_time;
       this.kid.content = response.data[1].content;
       this.kid.thumbnail = response.data[1].thumbnail;
 

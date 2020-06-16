@@ -18,6 +18,7 @@ class CreateKidsTable extends Migration
             $table->bigInteger('step_id')->unsigned();
             $table->integer('order');
             $table->string('title');
+            $table->integer('achievement_time');
             $table->text('content');
             $table->string('thumbnail')->nullable();
             $table->timestamps();

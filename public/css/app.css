@@ -702,6 +702,8 @@ table {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .c-hover__display-name {
@@ -861,6 +863,7 @@ table {
 @media screen and (max-width: 768px) {
   .p-imageText__box-image {
     width: 100%;
+    height: auto;
     margin-bottom: 30px;
   }
 }
@@ -1243,6 +1246,10 @@ table {
   .p-step__title {
     font-size: 20px;
   }
+}
+
+.p-step__achievement_time {
+  margin: 30px 0;
 }
 
 .p-step__content {

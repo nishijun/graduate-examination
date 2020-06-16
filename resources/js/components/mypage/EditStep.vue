@@ -21,7 +21,7 @@
 
       <!-- 編集フォーム -->
       <keepAlive>
-        <component :is="step" v-bind="{parentData: parentData, childData: childData, categories: categories}"></component>
+        <component :is="step" v-bind="{parentData: parentData, childData: childData, categories: categories}" @getStepData="getStepData"></component>
       </keepAlive>
 
       <!-- ボタン -->
@@ -73,6 +73,9 @@ export default {
       }
 
       const response = await axios.post('/api/step/edit', formData);
+
+      // デバッグ
+      console.log(response.data);
 
       if (response.status === UNPROCESSABLE_ENTITY) {
         this.errors = response.data.errors;

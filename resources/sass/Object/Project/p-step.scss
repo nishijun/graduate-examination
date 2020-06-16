@@ -130,6 +130,9 @@
       font-size: $font-size_20;
     }
   }
+  &__achievement_time {
+    margin: $space_30 0;
+  }
   &__content {
     background: $color_gray;
     padding: $space_15;

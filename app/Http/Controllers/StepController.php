@@ -80,11 +80,13 @@ class StepController extends Controller {
       if ($kid) {
         // 既に子STEPが存在していた場合（編集）
         $kid->title = $request->title[$i];
+        $kid->achievement_time = $request->achievement_time[$i];
         $kid->content = $request->content[$i];
       } else {
         // 新しく子STEPを作る場合
         $kid = new Kid();
         $kid->title = $request->title[$i];
+        $kid->achievement_time = $request->achievement_time[$i];
         $kid->content = $request->content[$i];
       }
       $kid->step_id = $request->p_id;
@@ -111,8 +113,19 @@ class StepController extends Controller {
 
   // <-------------- 子STEP削除 -------------->
   public function kidDelete(Request $request) {
-    Kid::find($request->id)->forceDelete();
+    // 子STEP削除
+    Kid::find($request->kid_id)->forceDelete();
     Record::where('kid_id', $request->id)->delete();
+
+    // 子STEP番号繰り下げ処理
+    $kids = Kid::where('step_id', $request->parent_id)->get();
+    foreach ($kids as $kid) {
+      if ($kid->order > $request->kid_order) {
+        $result = Kid::find($kid->id);
+        $result->order -= 1;
+        $result->save();
+      }
+    }
   }
 
   // <-------------- STEP削除 -------------->
