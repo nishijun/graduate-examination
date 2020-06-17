@@ -115,7 +115,7 @@ class StepController extends Controller {
   public function kidDelete(Request $request) {
     // 子STEP削除
     Kid::find($request->kid_id)->forceDelete();
-    Record::where('kid_id', $request->id)->delete();
+    Record::where('kid_id', $request->kid_id)->delete();
 
     // 子STEP番号繰り下げ処理
     $kids = Kid::where('step_id', $request->parent_id)->get();
@@ -202,13 +202,26 @@ class StepController extends Controller {
 
   // <-------------- 子STEP詳細ページ情報取得 -------------->
   public function kid($stepId, $kidId) {
+    // 親STEP詳細
+    $step = Step::find($stepId);
+
     // 子STEP情報
-    $kid = Kid::where('id', $kidId)->first();
+    $kid = Kid::find($kidId);
 
     // クリア有無
     $record = Record::where('user_id', Auth::id())->where('kid_id', $kidId)->first();
 
-    $results = [$stepId, $kid, $record];
+    // チャレンジ有無
+    $challenge = Challenge::where('step_id', $stepId)->where('user_id', Auth::id())->first();
+
+    // 前後番号の子STEP取得
+    $previousStep = Kid::where('step_id', $stepId)->where('order', $kid->order - 1)->first();
+    $nextStep = Kid::where('step_id', $stepId)->where('order', $kid->order + 1)->first();
+
+    // 前STEPのクリア状況
+    $previousClear = $previousStep ? Record::where('kid_id', $previousStep->id)->where('user_id', Auth::id())->first() : true;
+
+    $results = [$step, $kid, $record, $challenge, $previousStep, $nextStep, $previousClear];
     return $results;
   }
 
@@ -220,6 +233,12 @@ class StepController extends Controller {
 
   // <-------------- STEPクリア解除 -------------->
   public function unclear (Request $request) {
-    Record::where('user_id', $request->user_id)->where('kid_id', $request->kid_id)->delete();
+    $deleteRecord = Record::where('user_id', Auth::id())->where('kid_id', $request->kid_id)->with('kid')->first();
+
+    Record::where('user_id', Auth::id())->whereHas('kid', function($q) use($request, $deleteRecord) {
+      $q->where('step_id', $request->step_id)->where('order', '>', $deleteRecord->kid->order);
+    })->delete();
+
+    $deleteRecord->delete();
   }
 }

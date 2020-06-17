@@ -74,9 +74,6 @@ export default {
 
       const response = await axios.post('/api/step/edit', formData);
 
-      // デバッグ
-      console.log(response.data);
-
       if (response.status === UNPROCESSABLE_ENTITY) {
         this.errors = response.data.errors;
         return false;

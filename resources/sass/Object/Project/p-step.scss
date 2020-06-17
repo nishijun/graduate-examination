@@ -139,4 +139,16 @@
     line-height: 1.3;
     white-space: pre-wrap;
   }
+  &__link {
+    margin: $space_30 0;
+    &-left {
+      float: left;
+    }
+    &-right {
+      float: right;
+    }
+    &-cb {
+      clear: both;
+    }
+  }
 }

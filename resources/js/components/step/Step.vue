@@ -37,8 +37,11 @@
 
         <!-- クリック時、STEP作成者情報モーダル出現 -->
         <tr class="c-hover__target" @click="isHover = !isHover">
-          <th class="c-table-th">作成者名</th>
-          <td class="c-table-td">{{ step.user.name }}</td>
+          <th class="c-table-th c-table-th-neo">
+            <div class="c-table-th-neo-icon"><i class="fas fa-hand-pointer"></i></div>
+            作成者名
+          </th>
+          <td class="c-table-td c-table-td-neo">{{ step.user.name }}</td>
         </tr>
 
       </table>
@@ -57,7 +60,7 @@
     <!-- 子STEP一覧 -->
     <div class="p-step__children" v-if="kids.length >= 1">
 
-      <routerLink :class="['p-step__child', {'disabled': !isChallenge}]" tag="a" :to="{name: 'step-child', params: {stepId: $route.params.stepId, childId: kid.id}}" v-for="kid in kids" :key="kid.order">
+      <routerLink :class="['p-step__child', {'disabled': !isChallenge && !isOwnStep}]" tag="a" :to="{name: 'step-child', params: {stepId: $route.params.stepId, childId: kid.id}}" v-for="kid in kids" :key="kid.order">
         <img :src="'/storage/kid_thumbnails/' + kid.thumbnail" alt="STEPイメージ" class="p-step__child-image" v-if="kid.thumbnail">
         <img src="/img/noimg.png" alt="STEPイメージ" class="p-step__child-image" v-else>
         <div class="p-step__child-content">

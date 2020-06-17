@@ -3057,22 +3057,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 response = _context.sent;
-                // デバッグ
-                console.log(response.data);
 
                 if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_3__["UNPROCESSABLE_ENTITY"])) {
-                  _context.next = 11;
+                  _context.next = 10;
                   break;
                 }
 
                 _this.errors = response.data.errors;
                 return _context.abrupt("return", false);
 
-              case 11:
+              case 10:
                 _this.reset();
 
                 if (!(response.status !== _util__WEBPACK_IMPORTED_MODULE_3__["CREATED"])) {
-                  _context.next = 15;
+                  _context.next = 14;
                   break;
                 }
 
@@ -3080,7 +3078,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context.abrupt("return", false);
 
-              case 15:
+              case 14:
                 // Store更新
                 _this.$store.dispatch('step/getSteps'); // サクセスメッセージ登録
 
@@ -3092,7 +3090,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$router.push('/mypage');
 
-              case 18:
+              case 17:
               case "end":
                 return _context.stop();
             }
@@ -3801,6 +3799,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3812,12 +3819,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         thumbnail: ''
       },
       stepId: '',
-      isClear: null
+      isClear: null,
+      isOwn: false,
+      isChallenge: true,
+      previousStep: '',
+      nextStep: '',
+      previousClear: ''
     };
   },
   methods: {
     // 子STEP情報取得
-    getKid: function getKid() {
+    getKid: function getKid(id) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -3827,11 +3839,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("/api/step/".concat(_this.$route.params.stepId, "/").concat(_this.$route.params.childId));
+                return axios.get("/api/step/".concat(_this.$route.params.stepId, "/").concat(id));
 
               case 2:
                 response = _context.sent;
-                _this.stepId = response.data[0]; // 子STEP情報
+
+                // STEP作成者本人またはSTEP未挑戦者は閲覧不可
+                if (_this.$store.state.auth.user.id === response.data[0].user_id) {
+                  _this.isOwn = true;
+                } else if (!response.data[3]) {
+                  _this.isChallenge = false;
+
+                  _this.$router.push("/steps/".concat(_this.$route.params.stepId));
+                }
+
+                _this.stepId = response.data[0].id; // 子STEP情報
 
                 _this.kid.order = response.data[1].order;
                 _this.kid.title = response.data[1].title;
@@ -3839,9 +3861,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.kid.content = response.data[1].content;
                 _this.kid.thumbnail = response.data[1].thumbnail; // クリア有無
 
-                _this.isClear = response.data[2] ? true : false;
+                _this.isClear = response.data[2] ? true : false; // 前後子STEP情報
 
-              case 10:
+                _this.previousStep = response.data[4] ? response.data[4].id : null;
+                _this.nextStep = response.data[5] ? response.data[5].id : null; // 前STEPクリア状況
+
+                _this.previousClear = response.data[6] ? true : false;
+
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -3859,17 +3886,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                if (!_this2.isChallenge) {
+                  _context2.next = 8;
+                  break;
+                }
+
                 formData = new FormData();
                 formData.append('user_id', _this2.$store.state.auth.user.id);
                 formData.append('kid_id', _this2.$route.params.childId);
-                _context2.next = 5;
+                _context2.next = 6;
                 return axios.post('/api/step/clear', formData);
 
-              case 5:
+              case 6:
                 response = _context2.sent;
                 _this2.isClear = true;
 
-              case 7:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -3887,22 +3919,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (!confirm('クリア解除しますか？')) {
-                  _context3.next = 8;
+                if (!confirm('クリア解除しますか？（このSTEP以降のクリアも解除されます）')) {
+                  _context3.next = 9;
                   break;
                 }
 
                 formData = new FormData();
-                formData.append('user_id', _this3.$store.state.auth.user.id);
                 formData.append('kid_id', _this3.$route.params.childId);
+                formData.append('step_id', _this3.stepId);
                 _context3.next = 6;
                 return axios.post('/api/step/unclear', formData);
 
               case 6:
                 response = _context3.sent;
+                console.log(response.data);
                 _this3.isClear = false;
 
-              case 8:
+              case 9:
               case "end":
                 return _context3.stop();
             }
@@ -3911,8 +3944,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     }
   },
+  beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+    this.getKid(to.params.childId);
+    next();
+  },
   created: function created() {
-    this.getKid();
+    this.getKid(this.$route.params.childId);
   }
 });
 
@@ -3935,6 +3972,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -8050,17 +8090,36 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        !_vm.isClear
+        !_vm.isClear && !_vm.isOwn && _vm.previousClear
           ? _c(
               "button",
               { staticClass: "c-btn-neo", on: { click: _vm.clear } },
               [_vm._v("クリア")]
             )
-          : _c(
+          : _vm.isClear && !_vm.isOwn && _vm.previousClear
+          ? _c(
               "button",
               { staticClass: "c-btn-orange", on: { click: _vm.unclear } },
               [_vm._v("クリア解除")]
             )
+          : _vm.isOwn
+          ? _c(
+              "button",
+              { staticClass: "c-btn-green u-margin__lauto" },
+              [
+                _c(
+                  "routerLink",
+                  { attrs: { tag: "a", to: { name: "editStep" } } },
+                  [_vm._v("編集する")]
+                )
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.isOwn && !_vm.previousClear
+          ? _c("p", [_vm._v("まだ前STEPをクリアしていません。")])
+          : _vm._e()
       ],
       1
     ),
@@ -8092,7 +8151,56 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "p-step__content" }, [
       _vm._v(_vm._s(_vm.kid.content))
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-step__link" },
+      [
+        _vm.previousStep
+          ? _c(
+              "routerLink",
+              {
+                staticClass: "p-step__link-left",
+                attrs: {
+                  tag: "a",
+                  to: {
+                    name: "step-child",
+                    params: { stepId: _vm.stepId, childId: _vm.previousStep }
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-chevron-left u-margin__10r" }),
+                _vm._v("前STEP")
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.nextStep
+          ? _c(
+              "routerLink",
+              {
+                staticClass: "p-step__link-right",
+                attrs: {
+                  tag: "a",
+                  to: {
+                    name: "step-child",
+                    params: { stepId: _vm.stepId, childId: _vm.nextStep }
+                  }
+                }
+              },
+              [
+                _vm._v("次STEP"),
+                _c("i", { staticClass: "fas fa-chevron-right u-margin__10l" })
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-step__link-cb" })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -8237,9 +8345,9 @@ var render = function() {
             }
           },
           [
-            _c("th", { staticClass: "c-table-th" }, [_vm._v("作成者名")]),
+            _vm._m(0),
             _vm._v(" "),
-            _c("td", { staticClass: "c-table-td" }, [
+            _c("td", { staticClass: "c-table-td c-table-td-neo" }, [
               _vm._v(_vm._s(_vm.step.user.name))
             ])
           ]
@@ -8251,7 +8359,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _vm._m(1),
     _vm._v(" "),
     !_vm.isOwnStep && !_vm.isChallenge
       ? _c(
@@ -8297,7 +8405,10 @@ var render = function() {
               "routerLink",
               {
                 key: kid.order,
-                class: ["p-step__child", { disabled: !_vm.isChallenge }],
+                class: [
+                  "p-step__child",
+                  { disabled: !_vm.isChallenge && !_vm.isOwnStep }
+                ],
                 attrs: {
                   tag: "a",
                   to: {
@@ -8347,6 +8458,17 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", { staticClass: "c-table-th c-table-th-neo" }, [
+      _c("div", { staticClass: "c-table-th-neo-icon" }, [
+        _c("i", { staticClass: "fas fa-hand-pointer" })
+      ]),
+      _vm._v("\n          作成者名\n        ")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
