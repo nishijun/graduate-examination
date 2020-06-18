@@ -1,6 +1,6 @@
 <template>
   <main>
-    
+
     <!-- ヒーロービュー -->
     <section class="p-hero l-main1">
       <div class="p-hero__image">
@@ -11,9 +11,7 @@
       <div class="p-hero__content u-padding__30x">
         <h2 class="c-hero__message2">あなたの人生の<span>STEP</span>を共有しよう</h2>
         <p class="c-hero__sentence">プログラミングや英語、スポーツなど、おすすめの学習ステップや教材を他の人に紹介して、あなたがこれまでどのように学んできたのか、またそのコツなどをシェアしましょう。<br class="u-display__sm-delete"><br class="u-display__sm-delete">またこのサービスを通じて、これからあなたが身につけたいと思っているスキルや能力など、既にSTEPを共有してくれている人達から修得するための知恵を学び、そして挑戦していきましょう。</p>
-        <button class="c-btn u-margin__auto">
-          <routerLink :to="{name: 'signup'}" tag="a">はじめる</routerLink>
-        </button>
+        <routerLink class="c-btn-neo u-margin__auto" :to="{name: 'signup'}">はじめる</routerLink>
       </div>
     </section>
 
@@ -21,15 +19,21 @@
     <section class="p-imageText">
       <h2 class="p-imageText__title">STEP例</h2>
       <div class="p-imageText__box">
-        <img src="/img/top-img1.jpg" alt="TOPイメージ1" class="p-imageText__box-image">
-          <p class="p-imageText__box-text">フリーエンジニアとして年収1000万円を達成するステップ</p>
+        <div class="p-imageText__box-image">
+          <img src="/img/top-img1.jpg" alt="TOPイメージ1">
+        </div>
+        <p class="p-imageText__box-text">フリーエンジニアとして年収1000万円を達成するステップ</p>
       </div>
       <div class="p-imageText__box">
-        <img src="/img/top-img2.jpg" alt="TOPイメージ2" class="p-imageText__box-image">
+        <div class="p-imageText__box-image">
+          <img src="/img/top-img2.jpg" alt="TOPイメージ2">
+        </div>
         <p class="p-imageText__box-text">3ポイントシュートの練習方法</p>
       </div>
       <div class="p-imageText__box">
-        <img src="/img/top-img3.jpg" alt="TOPイメージ3" class="p-imageText__box-image">
+        <div class="p-imageText__box-image">
+          <img src="/img/top-img3.jpg" alt="TOPイメージ3">
+        </div>
         <p class="p-imageText__box-text">ミックスボイスの習得方法</p>
       </div>
     </section>

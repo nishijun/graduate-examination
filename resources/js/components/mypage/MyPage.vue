@@ -18,7 +18,7 @@
         </div>
         <div v-else class="c-stepMenu">
           <p @click="toggle(index)"><i class="fas fa-times"></i></p>
-          <button class="c-btn u-margin__auto u-margin__20y"><routerLink tag="a" :to="{name: 'editStep', params: {stepId: myStep.id}}">編集する</routerLink></button>
+          <routerLink class="c-btn-neo u-margin__auto u-margin__20y" :to="{name: 'editStep', params: {stepId: myStep.id}}">編集する</routerLink>
           <button class="c-btn-orange u-margin__auto" @click="deleteStep(myStep.id)">削除する</button>
         </div>
       </div>

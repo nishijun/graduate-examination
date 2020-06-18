@@ -54,7 +54,7 @@
     </div>
     <button class="c-btn-neo u-margin__lauto" v-if="!isOwnStep && !isChallenge" @click="challenge">挑戦する</button>
     <button class="c-btn-orange u-margin__lauto" v-else-if="!isOwnStep && isChallenge" @click="release">挑戦解除</button>
-    <button class="c-btn-green u-margin__lauto" v-else><routerLink tag="a" :to="{name: 'editStep'}">編集する</routerLink></button>
+    <routerLink class="c-btn-green u-margin__lauto" :to="{name: 'editStep'}" v-else>編集する</routerLink>
     <p v-if="!isChallenge && !isOwnStep && kids.length >= 1">子STEP詳細は挑戦開始後に閲覧可能になります。</p>
 
     <!-- 子STEP一覧 -->

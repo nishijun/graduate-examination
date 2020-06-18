@@ -1,4 +1,8 @@
 import Vue from 'vue';
+
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import { router } from './router';
 import { globalMixins } from './mixins/pageTitle';
 import store from './store';
@@ -17,7 +21,7 @@ const previousFunction = async () => {
 
   // 全STEP取得
   await store.dispatch('step/getSteps');
-  
+
   const app = new Vue({
     el: '#app',
     router,

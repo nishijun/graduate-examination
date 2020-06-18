@@ -6,7 +6,7 @@
       <routerLink tag="a" :to="{name: 'step', params: {stepId: stepId}}" class="c-link"><i class="fas fa-chevron-left u-margin__10r"></i>STEP詳細に戻る</routerLink>
       <button class="c-btn-neo" v-if="!isClear && !isOwn && previousClear" @click="clear">クリア</button>
       <button class="c-btn-orange" v-else-if="isClear && !isOwn && previousClear" @click="unclear">クリア解除</button>
-      <button class="c-btn-green u-margin__lauto" v-else-if="isOwn"><routerLink tag="a" :to="{name: 'editStep'}">編集する</routerLink></button>
+      <routerLink class="c-btn-green u-margin__lauto" :to="{name: 'editStep'}" v-else-if="isOwn">編集する</routerLink>
       <p v-if="!isOwn && !previousClear">まだ前STEPをクリアしていません。</p>
     </div>
 

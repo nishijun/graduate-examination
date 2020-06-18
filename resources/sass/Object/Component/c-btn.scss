@@ -42,6 +42,8 @@
   color: $color_white;
   font-size: $font-size_30;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
   &:hover {
     opacity: .8;
   }
@@ -63,6 +65,10 @@
   background: $color_green;
   transition: .3s;
   display: block;
+  font-size: $font-size_30;
+  text-align: center;
+  text-decoration: none;
+  color: $color_white;
   &:hover {
     opacity: .8;
   }
