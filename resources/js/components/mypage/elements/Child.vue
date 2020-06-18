@@ -72,7 +72,13 @@ export default {
           formData.append('parent_id', this.$attrs.parentData.id);
           const response = await axios.post('/api/kid/delete', formData);
         }
-        this.$emit('getStepData');
+        let deletedOrder = this.childData[index].order;
+        this.childData.splice(index, 1);
+        this.childData.forEach(data => {
+          if (data.order > deletedOrder) {
+            data.order--;
+          }
+        });
       }
     },
 

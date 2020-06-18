@@ -3490,13 +3490,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var formData, response;
+        var formData, response, deletedOrder;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!confirm('本当に削除しますか？')) {
-                  _context.next = 10;
+                  _context.next = 12;
                   break;
                 }
 
@@ -3516,9 +3516,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
 
               case 9:
-                _this.$emit('getStepData');
+                deletedOrder = _this.childData[index].order;
 
-              case 10:
+                _this.childData.splice(index, 1);
+
+                _this.childData.forEach(function (data) {
+                  if (data.order > deletedOrder) {
+                    data.order--;
+                  }
+                });
+
+              case 12:
               case "end":
                 return _context.stop();
             }
